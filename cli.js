@@ -2,15 +2,13 @@
 
 const path = require('path');
 const fs = require('fs');
-const sol2abi = require('./sol2abi');
-const abi2js = require('./abi2js');
+const sol2js = require('./');
 
 const target = path.join(process.cwd(), process.argv[2]);
 
 const source = fs.readFileSync(target, 'utf8');
 
-sol2abi(source, (err, abi) => {
+sol2js(source, process.argv[3], (err, js) => {
   if (err) throw err;
-
-  console.log(abi2js(abi, process.argv[3]));
+  console.log(js);
 });
