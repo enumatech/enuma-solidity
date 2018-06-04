@@ -10,6 +10,7 @@ const readFile = filepath =>
   });
 
 const getPragmaRegx = () => /(pragma solidity (.+?);)/g;
+
 const getImportRegx = () => /import ['"](.+?)['"];/g;
 
 module.exports = async function combine(filepath) {
