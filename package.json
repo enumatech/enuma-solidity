@@ -1,6 +1,6 @@
 {
   "name": "enuma-solidity",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
@@ -29,6 +29,8 @@
     "web3": "^1.0.0-beta.34"
   },
   "jest": {
-    "collectCoverageFrom": ["src/**/*.js"]
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
   }
 }
