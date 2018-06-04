@@ -1,16 +1,19 @@
 const path = require('path');
 const combine = require('../src/combine');
 
-test('no import', done => {
-  combine(path.join(__dirname, '../__fixtures__/SafeMath.sol')).then(source => {
-    expect(source).toMatchSnapshot();
-    done();
+function testFixture(name) {
+  test(name, done => {
+    combine(path.join(__dirname, `../__fixtures__/${name}.sol`)).then(
+      source => {
+        expect(source).toMatchSnapshot();
+        done();
+      }
+    );
   });
-});
+}
 
-test('single import', done => {
-  combine(path.join(__dirname, '../__fixtures__/Token.sol')).then(source => {
-    expect(source).toMatchSnapshot();
-    done();
-  });
-});
+testFixture('SafeMath');
+
+testFixture('Token');
+
+testFixture('StandardToken');
