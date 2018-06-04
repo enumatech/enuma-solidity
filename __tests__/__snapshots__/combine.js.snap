@@ -54,10 +54,6 @@ library SafeMath {
 exports[`StandardToken 1`] = `
 "pragma solidity ^0.4.23;
 
-
-
-
-
 /**
  * @title SafeMath
  * @dev Math operations with safety checks that throw on error
@@ -104,11 +100,9 @@ library SafeMath {
   }
 }
 
-
 contract Token {
   function balanceOf(address _owner) constant returns (uint256 balance) {}
 }
-
 
 contract StandardToken is Token {
   function transfer(address _to, uint256 _value) returns (bool success) {}
@@ -119,8 +113,6 @@ contract StandardToken is Token {
 exports[`Token 1`] = `
 "pragma solidity ^0.4.23;
 
-
-
 /**
  * @title SafeMath
  * @dev Math operations with safety checks that throw on error
@@ -166,7 +158,6 @@ library SafeMath {
     return c;
   }
 }
-
 
 contract Token {
   function balanceOf(address _owner) constant returns (uint256 balance) {}

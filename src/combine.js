@@ -23,7 +23,7 @@ module.exports = async function combine(filepath) {
     const importPath = path.resolve(path.dirname(filepath), m[1]);
     let importSource = await combine(importPath, true);
 
-    importSource = importSource.replace(getPragmaRegx(), '');
+    importSource = importSource.replace(getPragmaRegx(), '').trim();
     replaces.push(importSource);
   }
 
