@@ -12,6 +12,10 @@ const v = {
 
 const validators = Object.keys(v).reduce((x, k) => {
   x[k] = (x, msg) => {
+    if (!v[k]) {
+      throw new Error(`${k} validator missing`);
+    }
+
     if (!v[k](x)) {
       throw new Error(msg);
     }
