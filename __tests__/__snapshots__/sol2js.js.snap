@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Hello World 1`] = `
+exports[`HelloWorld 1`] = `
 "import Web3 from 'web3';
   import assert from 'assert';
   const { validators } = require('../src/utils');
