@@ -20,7 +20,10 @@ module.exports = {
       {
         test: /\.sol$/,
         use: {
-          loader: path.resolve(__dirname, './src/loader.js')
+          loader: path.resolve(__dirname, './src/loader.js'),
+          options: {
+            provider: 'ws://localhost:7545'
+          }
         }
       }
     ]

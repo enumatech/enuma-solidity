@@ -1,13 +1,11 @@
 const path = require('path');
-const fs = require('fs');
-const sol2js = require('../');
+const sol2js = require('../src/sol2js');
 
 function testFixture(name) {
-  const fixture = path.join(__dirname, '../__fixtures__/', `${name}.sol`);
-  const sol = fs.readFileSync(fixture, 'utf8');
+  const filepath = path.join(__dirname, '../__fixtures__/', `${name}.sol`);
 
   test(name, done => {
-    sol2js(sol, 'ws://localhost:7545', (err, js) => {
+    sol2js(filepath, { provider: 'ws://localhost:7545' }).then(js => {
       expect(js).toMatchSnapshot();
       done();
     });
@@ -15,3 +13,7 @@ function testFixture(name) {
 }
 
 testFixture('HelloWorld');
+
+testFixture('Token');
+
+testFixture('StandardToken');

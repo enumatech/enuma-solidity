@@ -32,3 +32,135 @@ exports[`HelloWorld 1`] = `
   
   }"
 `;
+
+exports[`StandardToken 1`] = `
+"import Web3 from 'web3';
+  import assert from 'assert';
+  const { validators } = require('../src/utils');
+
+  const web3 = new Web3(\\"ws://localhost:7545\\");
+
+  
+  export class SafeMath {
+
+      /**
+       *
+       * @param {string} address
+       */
+      constructor(address){
+          assert.equal(arguments.length, 1);
+
+          this._contract = new web3.eth.Contract([], address);
+      }
+
+      
+  }
+
+  export class StandardToken {
+
+      /**
+       *
+       * @param {string} address
+       */
+      constructor(address){
+          assert.equal(arguments.length, 1);
+
+          this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_owner\\",\\"type\\":\\"address\\"}],\\"name\\":\\"balanceOf\\",\\"outputs\\":[{\\"name\\":\\"balance\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"},{\\"constant\\":false,\\"inputs\\":[{\\"name\\":\\"_to\\",\\"type\\":\\"address\\"},{\\"name\\":\\"_value\\",\\"type\\":\\"uint256\\"}],\\"name\\":\\"transfer\\",\\"outputs\\":[{\\"name\\":\\"success\\",\\"type\\":\\"bool\\"}],\\"payable\\":false,\\"stateMutability\\":\\"nonpayable\\",\\"type\\":\\"function\\"}], address);
+      }
+
+      
+  /**
+* @param {string} _owner
+* @return {number}*/
+  balanceOf(_owner) {
+    assert.equal(arguments.length, 1);
+    validators.address(_owner)
+    return this._contract.methods.balanceOf(_owner);
+  }
+  
+
+  /**
+* @param {string} _to
+* @param {number} _value
+* @return {boolean}*/
+  transfer(_to, _value) {
+    assert.equal(arguments.length, 2);
+    validators.address(_to)
+validators.uint256(_value)
+    return this._contract.methods.transfer(_to, _value);
+  }
+  
+  }
+
+  export class Token {
+
+      /**
+       *
+       * @param {string} address
+       */
+      constructor(address){
+          assert.equal(arguments.length, 1);
+
+          this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_owner\\",\\"type\\":\\"address\\"}],\\"name\\":\\"balanceOf\\",\\"outputs\\":[{\\"name\\":\\"balance\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"}], address);
+      }
+
+      
+  /**
+* @param {string} _owner
+* @return {number}*/
+  balanceOf(_owner) {
+    assert.equal(arguments.length, 1);
+    validators.address(_owner)
+    return this._contract.methods.balanceOf(_owner);
+  }
+  
+  }"
+`;
+
+exports[`Token 1`] = `
+"import Web3 from 'web3';
+  import assert from 'assert';
+  const { validators } = require('../src/utils');
+
+  const web3 = new Web3(\\"ws://localhost:7545\\");
+
+  
+  export class SafeMath {
+
+      /**
+       *
+       * @param {string} address
+       */
+      constructor(address){
+          assert.equal(arguments.length, 1);
+
+          this._contract = new web3.eth.Contract([], address);
+      }
+
+      
+  }
+
+  export class Token {
+
+      /**
+       *
+       * @param {string} address
+       */
+      constructor(address){
+          assert.equal(arguments.length, 1);
+
+          this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_owner\\",\\"type\\":\\"address\\"}],\\"name\\":\\"balanceOf\\",\\"outputs\\":[{\\"name\\":\\"balance\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"}], address);
+      }
+
+      
+  /**
+* @param {string} _owner
+* @return {number}*/
+  balanceOf(_owner) {
+    assert.equal(arguments.length, 1);
+    validators.address(_owner)
+    return this._contract.methods.balanceOf(_owner);
+  }
+  
+  }"
+`;

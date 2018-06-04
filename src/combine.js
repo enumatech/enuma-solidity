@@ -28,9 +28,7 @@ module.exports = async function combine(filepath) {
   }
 
   let i = 0;
-  const combined = source.replace(getImportRegx(), m => {
-    return replaces[i++];
-  });
+  const combined = source.replace(getImportRegx(), () => replaces[i++]);
 
   return combined;
 };

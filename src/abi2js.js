@@ -1,4 +1,4 @@
-const { docTypes, validators } = require('./utils');
+const { docTypes } = require('./utils');
 
 function fn2js(fn) {
   const paramDocs = fn.inputs

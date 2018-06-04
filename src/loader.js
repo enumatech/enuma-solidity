@@ -1,20 +1,25 @@
-const sol2abi = require('./sol2abi');
-const abi2js = require('./abi2js');
+const loaderUtils = require('loader-utils');
+const validateOptions = require('schema-utils');
+const sol2js = require('./sol2js');
 
-const generate = (content, cb) => {
-  sol2abi(content, (err, abi) => {
-    if (err) return cb(err);
-
-    const source = abi2js(abi, 'ws://localhost:7545');
-
-    cb(null, source);
-  });
+const schema = {
+  type: 'object',
+  properties: {
+    provider: {
+      type: 'string'
+    }
+  }
 };
 
 module.exports = function(content, map, meta) {
-  const callback = this.async();
-  generate(content, function(err, result) {
-    if (err) return callback(err);
-    callback(null, result, map, meta);
-  });
+  const options = loaderUtils.getOptions(this);
+  const cb = this.async();
+
+  validateOptions(schema, options, 'sol-loader');
+
+  sol2js(this.resourcePath, options)
+    .then(result => {
+      cb(null, result, map, meta);
+    })
+    .catch(cb);
 };
