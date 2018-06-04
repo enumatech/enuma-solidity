@@ -59,10 +59,20 @@ export class StandardToken {
   constructor(address){
     assert.equal(arguments.length, 1);
 
-    this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_owner\\",\\"type\\":\\"address\\"}],\\"name\\":\\"balanceOf\\",\\"outputs\\":[{\\"name\\":\\"balance\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"},{\\"constant\\":false,\\"inputs\\":[{\\"name\\":\\"_to\\",\\"type\\":\\"address\\"},{\\"name\\":\\"_value\\",\\"type\\":\\"uint256\\"}],\\"name\\":\\"transfer\\",\\"outputs\\":[{\\"name\\":\\"success\\",\\"type\\":\\"bool\\"}],\\"payable\\":false,\\"stateMutability\\":\\"nonpayable\\",\\"type\\":\\"function\\"}], address);
+    this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[],\\"name\\":\\"totalSupply\\",\\"outputs\\":[{\\"name\\":\\"\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"},{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_owner\\",\\"type\\":\\"address\\"}],\\"name\\":\\"balanceOf\\",\\"outputs\\":[{\\"name\\":\\"balance\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"},{\\"constant\\":false,\\"inputs\\":[{\\"name\\":\\"_to\\",\\"type\\":\\"address\\"},{\\"name\\":\\"_value\\",\\"type\\":\\"uint256\\"}],\\"name\\":\\"transfer\\",\\"outputs\\":[{\\"name\\":\\"success\\",\\"type\\":\\"bool\\"}],\\"payable\\":false,\\"stateMutability\\":\\"nonpayable\\",\\"type\\":\\"function\\"}], address);
   }
 
   
+  /**
+
+* @return {number}*/
+  totalSupply() {
+    assert.equal(arguments.length, 0);
+    
+    return this._contract.methods.totalSupply();
+  }
+  
+
   /**
 * @param {string} _owner
 * @return {number}*/
