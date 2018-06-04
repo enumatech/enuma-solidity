@@ -13,12 +13,4 @@ _.range(8, 264, 8).forEach(x => {
   docTypes[`int${x}`] = 'number';
 });
 
-const validators = {
-  string: () => {},
-  address: () => {}
-};
-
-module.exports = {
-  docTypes,
-  validators
-};
+module.exports = docTypes;

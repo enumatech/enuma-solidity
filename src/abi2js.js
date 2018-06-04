@@ -1,4 +1,4 @@
-const { docTypes } = require('./utils');
+const docTypes = require('./doc-types');
 
 function fn2js(fn) {
   const paramDocs = fn.inputs
@@ -9,7 +9,12 @@ function fn2js(fn) {
     .map(x => `* @return {${docTypes[x.type]}}`)
     .join('\n');
   const validates = fn.inputs
-    .map(x => `validators.${x.type}(${x.name})`)
+    .map(
+      x =>
+        `validators.${x.type}(${x.name}, '${fn.name}: ${x.name} must be ${
+          x.type
+        }')`
+    )
     .join('\n');
 
   const args = fn.inputs.map(x => x.name).join(', ');
@@ -17,7 +22,7 @@ function fn2js(fn) {
   return `
   ${paramDocs || returnDocs ? `/**\n${paramDocs}\n${returnDocs}*/` : ''}
   ${fn.name}(${args}) {
-    assert.equal(arguments.length, ${fn.inputs.length});
+    validators.true(arguments.length === ${fn.inputs.length});
     ${validates}
     return this._contract.methods.${fn.name}(${args});
   }
@@ -33,7 +38,8 @@ function contract2js(name, contract) {
    * @param {string} address
    */
   constructor(address){
-    assert.equal(arguments.length, 1);
+    validators.true(arguments.length === 1);
+    validators.address(address);
 
     this._contract = new web3.eth.Contract(${JSON.stringify(
       contract
@@ -49,8 +55,7 @@ module.exports = function abi2js(abi, provider) {
 
   // todo: utils path resolve fix
   return `import Web3 from 'web3';
-import assert from 'assert';
-const { validators } = require('../src/utils');
+const validators = require('../src/validators');
 
 const web3 = new Web3(${JSON.stringify(provider)});
 

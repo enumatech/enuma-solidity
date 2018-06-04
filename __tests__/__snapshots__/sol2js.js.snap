@@ -3,7 +3,7 @@
 exports[`HelloWorld 1`] = `
 "import Web3 from 'web3';
 import assert from 'assert';
-const { validators } = require('../src/utils');
+const validators = require('../src/validators');
 
 const web3 = new Web3(\\"ws://localhost:7545\\");
 
@@ -34,7 +34,7 @@ export class HelloWorld {
 exports[`StandardToken 1`] = `
 "import Web3 from 'web3';
 import assert from 'assert';
-const { validators } = require('../src/utils');
+const validators = require('../src/validators');
 
 const web3 = new Web3(\\"ws://localhost:7545\\");
 
@@ -122,7 +122,7 @@ export class Token {
 exports[`Token 1`] = `
 "import Web3 from 'web3';
 import assert from 'assert';
-const { validators } = require('../src/utils');
+const validators = require('../src/validators');
 
 const web3 = new Web3(\\"ws://localhost:7545\\");
 
