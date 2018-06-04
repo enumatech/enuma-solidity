@@ -15,7 +15,7 @@ module.exports = function(content, map, meta) {
   const options = loaderUtils.getOptions(this);
   const cb = this.async();
 
-  validateOptions(schema, options, 'sol-loader');
+  validateOptions(schema, options, 'Enuma Solidity');
 
   sol2js(this.resourcePath, options)
     .then(result => {

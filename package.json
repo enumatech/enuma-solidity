@@ -1,5 +1,5 @@
 {
-  "name": "sol-loader",
+  "name": "enuma-solidity",
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "lint": "eslint src",
     "test": "jest --coverage"
   },
-  "author": "Wang Zuo <wzuoadjusted@gmail.com>",
+  "author": "Wang Zuo <zuo.wang@enuma.io>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",

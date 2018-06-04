@@ -15,6 +15,12 @@ module.exports = {
     runtimeChunk: true
   },
 
+  resolve: {
+    alias: {
+      'enuma-solidity/validators': path.join(__dirname, 'validators.js')
+    }
+  },
+
   module: {
     rules: [
       {

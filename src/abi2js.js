@@ -53,9 +53,8 @@ function contract2js(name, contract) {
 module.exports = function abi2js(abi, provider) {
   if (!provider) throw new Error('provider not specified');
 
-  // todo: utils path resolve fix
   return `import Web3 from 'web3';
-const validators = require('../src/validators');
+const validators = require('enuma-solidity/validators');
 
 const web3 = new Web3(${JSON.stringify(provider)});
 
