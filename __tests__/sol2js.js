@@ -17,3 +17,5 @@ testFixture('HelloWorld');
 testFixture('Token');
 
 testFixture('StandardToken');
+
+testFixture('Overloading');

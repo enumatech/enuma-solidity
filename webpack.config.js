@@ -17,7 +17,8 @@ module.exports = {
 
   resolve: {
     alias: {
-      'enuma-solidity/validators': path.join(__dirname, 'validators.js')
+      'enuma-solidity/validators': path.join(__dirname, 'validators.js'),
+      'enuma-solidity/web3': path.join(__dirname, 'web3.js')
     }
   },
 

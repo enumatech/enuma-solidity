@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HelloWorld 1`] = `
-"import Web3 from 'web3';
+"const Web3 = require('enuma-solidity/web3');
 const validators = require('enuma-solidity/validators');
 
 const web3 = new Web3(\\"ws://localhost:7545\\");
@@ -11,9 +11,9 @@ export class HelloWorld {
   /**
    * @param {string} address
    */
-  constructor(address){
+  constructor(address) {
     validators.true(arguments.length === 1);
-    validators.address(address);
+    validators.address(address, 'create contract with valid address');
 
     this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[],\\"name\\":\\"Hi\\",\\"outputs\\":[{\\"name\\":\\"\\",\\"type\\":\\"string\\"}],\\"payable\\":false,\\"stateMutability\\":\\"pure\\",\\"type\\":\\"function\\"}], address);
   }
@@ -25,14 +25,57 @@ export class HelloWorld {
   Hi() {
     validators.true(arguments.length === 0);
     
-    return this._contract.methods.Hi();
+    return this._contract.methods['0x9a6e22f7']();
   }
+  
   
 }"
 `;
 
+exports[`Overloading 1`] = `
+"const Web3 = require('enuma-solidity/web3');
+const validators = require('enuma-solidity/validators');
+
+const web3 = new Web3(\\"ws://localhost:7545\\");
+
+export class Overload {
+
+  /**
+   * @param {string} address
+   */
+  constructor(address) {
+    validators.true(arguments.length === 1);
+    validators.address(address, 'create contract with valid address');
+
+    this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_in\\",\\"type\\":\\"uint256\\"},{\\"name\\":\\"_key\\",\\"type\\":\\"bytes32\\"}],\\"name\\":\\"f\\",\\"outputs\\":[{\\"name\\":\\"out\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"pure\\",\\"type\\":\\"function\\"},{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_in\\",\\"type\\":\\"uint256\\"}],\\"name\\":\\"f\\",\\"outputs\\":[{\\"name\\":\\"out\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"pure\\",\\"type\\":\\"function\\"}], address);
+  }
+
+  
+  f(...args) {
+    const inputs = [[\\"uint256\\",\\"bytes32\\"],[\\"uint256\\"]];
+    let match = -1;
+
+    for(let i = 0, l = inputs.length; i++; i < l) {
+      const input = inputs[0];
+      if(input.length === args.length) {
+        match = i;
+        break;
+      }
+    }
+
+    if(match >= 0) {
+      const signatures = [\\"0xa481e08c\\",\\"0xb3de648b\\"];
+      return this._contract.methods[signatures[match]](...args);
+    }
+
+    throw new Error('argument error');
+  }
+
+}"
+`;
+
 exports[`StandardToken 1`] = `
-"import Web3 from 'web3';
+"const Web3 = require('enuma-solidity/web3');
 const validators = require('enuma-solidity/validators');
 
 const web3 = new Web3(\\"ws://localhost:7545\\");
@@ -42,13 +85,14 @@ export class SafeMath {
   /**
    * @param {string} address
    */
-  constructor(address){
+  constructor(address) {
     validators.true(arguments.length === 1);
-    validators.address(address);
+    validators.address(address, 'create contract with valid address');
 
     this._contract = new web3.eth.Contract([], address);
   }
 
+  
   
 }
 export class StandardToken {
@@ -56,9 +100,9 @@ export class StandardToken {
   /**
    * @param {string} address
    */
-  constructor(address){
+  constructor(address) {
     validators.true(arguments.length === 1);
-    validators.address(address);
+    validators.address(address, 'create contract with valid address');
 
     this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[],\\"name\\":\\"totalSupply\\",\\"outputs\\":[{\\"name\\":\\"\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"},{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_owner\\",\\"type\\":\\"address\\"}],\\"name\\":\\"balanceOf\\",\\"outputs\\":[{\\"name\\":\\"balance\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"},{\\"constant\\":false,\\"inputs\\":[{\\"name\\":\\"_to\\",\\"type\\":\\"address\\"},{\\"name\\":\\"_value\\",\\"type\\":\\"uint256\\"}],\\"name\\":\\"transfer\\",\\"outputs\\":[{\\"name\\":\\"success\\",\\"type\\":\\"bool\\"}],\\"payable\\":false,\\"stateMutability\\":\\"nonpayable\\",\\"type\\":\\"function\\"}], address);
   }
@@ -70,7 +114,7 @@ export class StandardToken {
   totalSupply() {
     validators.true(arguments.length === 0);
     
-    return this._contract.methods.totalSupply();
+    return this._contract.methods['0x18160ddd']();
   }
   
 
@@ -80,7 +124,7 @@ export class StandardToken {
   balanceOf(_owner) {
     validators.true(arguments.length === 1);
     validators.address(_owner, 'balanceOf: _owner must be address')
-    return this._contract.methods.balanceOf(_owner);
+    return this._contract.methods['0x70a08231'](_owner);
   }
   
 
@@ -92,8 +136,9 @@ export class StandardToken {
     validators.true(arguments.length === 2);
     validators.address(_to, 'transfer: _to must be address')
 validators.uint256(_value, 'transfer: _value must be uint256')
-    return this._contract.methods.transfer(_to, _value);
+    return this._contract.methods['0xa9059cbb'](_to, _value);
   }
+  
   
 }
 export class Token {
@@ -101,9 +146,9 @@ export class Token {
   /**
    * @param {string} address
    */
-  constructor(address){
+  constructor(address) {
     validators.true(arguments.length === 1);
-    validators.address(address);
+    validators.address(address, 'create contract with valid address');
 
     this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_owner\\",\\"type\\":\\"address\\"}],\\"name\\":\\"balanceOf\\",\\"outputs\\":[{\\"name\\":\\"balance\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"}], address);
   }
@@ -115,14 +160,15 @@ export class Token {
   balanceOf(_owner) {
     validators.true(arguments.length === 1);
     validators.address(_owner, 'balanceOf: _owner must be address')
-    return this._contract.methods.balanceOf(_owner);
+    return this._contract.methods['0x70a08231'](_owner);
   }
+  
   
 }"
 `;
 
 exports[`Token 1`] = `
-"import Web3 from 'web3';
+"const Web3 = require('enuma-solidity/web3');
 const validators = require('enuma-solidity/validators');
 
 const web3 = new Web3(\\"ws://localhost:7545\\");
@@ -132,13 +178,14 @@ export class SafeMath {
   /**
    * @param {string} address
    */
-  constructor(address){
+  constructor(address) {
     validators.true(arguments.length === 1);
-    validators.address(address);
+    validators.address(address, 'create contract with valid address');
 
     this._contract = new web3.eth.Contract([], address);
   }
 
+  
   
 }
 export class Token {
@@ -146,9 +193,9 @@ export class Token {
   /**
    * @param {string} address
    */
-  constructor(address){
+  constructor(address) {
     validators.true(arguments.length === 1);
-    validators.address(address);
+    validators.address(address, 'create contract with valid address');
 
     this._contract = new web3.eth.Contract([{\\"constant\\":true,\\"inputs\\":[{\\"name\\":\\"_owner\\",\\"type\\":\\"address\\"}],\\"name\\":\\"balanceOf\\",\\"outputs\\":[{\\"name\\":\\"balance\\",\\"type\\":\\"uint256\\"}],\\"payable\\":false,\\"stateMutability\\":\\"view\\",\\"type\\":\\"function\\"}], address);
   }
@@ -160,8 +207,9 @@ export class Token {
   balanceOf(_owner) {
     validators.true(arguments.length === 1);
     validators.address(_owner, 'balanceOf: _owner must be address')
-    return this._contract.methods.balanceOf(_owner);
+    return this._contract.methods['0x70a08231'](_owner);
   }
+  
   
 }"
 `;
