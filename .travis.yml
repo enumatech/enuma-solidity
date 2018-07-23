@@ -8,3 +8,4 @@ addons:
       - sourceline: 'ppa:ethereum/ethereum'
     packages:
       - solc
+      - ethereum
