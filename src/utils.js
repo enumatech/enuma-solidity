@@ -22,6 +22,8 @@ exports.encodeFunctionSignature = func =>
         10
       );
 
+exports.sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // exports.hexToStr = hex => {
 //   let str = '';
 //   let i = 0;
