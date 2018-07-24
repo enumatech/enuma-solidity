@@ -1,14 +1,6 @@
-const gethd = require('gethd');
 const Client = require('../src/client');
 
 const client = new Client('http://localhost:8545');
-
-beforeAll(async () => {
-  gethd.start();
-  await gethd.waitForReady();
-}, 10000);
-
-afterAll(gethd.stop);
 
 test('call', async () => {
   const accounts = await client.call('eth_accounts');
