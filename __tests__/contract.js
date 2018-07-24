@@ -25,7 +25,6 @@ test('HelloWorld contract', async () => {
   ]);
 
   const receipt = await client.call('eth_getTransactionReceipt', [address]);
-
   expect(receipt.from).toEqual(account);
 
   const result = await client.call('eth_call', [
@@ -36,7 +35,6 @@ test('HelloWorld contract', async () => {
     },
     'latest'
   ]);
-
   expect(result).toEqual(
     '0x0000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000b48656c6c6f20576f726c64000000000000000000000000000000000000000000'
   );
