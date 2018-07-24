@@ -9,3 +9,10 @@ test('call', async () => {
   expect(accounts.length).toBe(2);
   expect(balance).not.toBeNull();
 });
+
+test('error', done => {
+  client.call('method_not_found').catch(err => {
+    expect(err.message).toMatch(/not available/);
+    done();
+  });
+});

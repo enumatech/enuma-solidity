@@ -19,8 +19,7 @@ class Client {
       .then(resp => resp.json())
       .then(data => {
         if (data.error) {
-          console.error(data.error);
-          throw new Error(data.error);
+          throw new Error(data.error.message);
         }
 
         return data.result;
