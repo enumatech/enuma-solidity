@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 const { Readable } = require('stream');
 
-module.exports = function solc(source, combined = []) {
+module.exports = function solc(source, combined = ['abi']) {
   const solc = spawn('solc', [`--combined-json=${combined.join(',')}`]);
   const str = new Readable();
 
