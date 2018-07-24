@@ -92,7 +92,7 @@ function contract2js(name, contract) {
 }`;
 }
 
-module.exports = function abi2js(abi, provider) {
+module.exports = function abi2js(contracts, provider) {
   if (!provider) throw new Error('provider not specified');
 
   return `const Web3 = require('enuma-solidity/web3');
@@ -100,7 +100,7 @@ const validators = require('enuma-solidity/validators');
 
 const web3 = new Web3(${JSON.stringify(provider)});
 
-${Object.keys(abi)
-    .map(k => contract2js(k, abi[k]))
+${Object.keys(contracts)
+    .map(k => contract2js(k, contracts[k].abi))
     .join('\n')}`;
 };

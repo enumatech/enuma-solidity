@@ -1,4 +1,5 @@
-const gethd = require('../../gethd');
+// const gethd = require('../../gethd');
+const gethd = require('gethd');
 
 module.exports = async () => {
   await gethd.start();
